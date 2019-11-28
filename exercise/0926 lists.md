@@ -1,6 +1,9 @@
+
+直接赋值,默认浅拷贝传递对象的引用而已,原始列表改变，被赋值的b也会做相同的改变
+
 ```python
 a=list(range(1,4))
-b=acopy
+b=a
 print('a:',a)
 print('b:',b)
 
@@ -9,13 +12,10 @@ print('b:',b)
     a: [1, 2, 3]
     b: <built-in method copy of list object at 0x0000020910648908>
     
-
+浅拷贝copy：
+对象本身被拷贝了，但没有拷贝子对象，共用同一个可变list对象
 
 ```python
-'''
-浅拷贝：
-对象本身被拷贝了，但没有拷贝子对象，共用同一个可变list对象
-'''
 a=list(range(1,4))
 b=a.copy()
 a.append(4)     # append改变的不是子对象，对象本身被拷贝了
@@ -34,7 +34,6 @@ a=[1,2,3,[4,5]]
 a[3][0]
 ```
 
-    
 
 
 ```python
@@ -57,15 +56,14 @@ print('b:',b)
     b: [1, 2, 3, [4.1, 5]]
     
 
+深拷贝deepcopy：包含对象里面的自对象的拷贝，所以原始对象的改变不会造成深拷贝里任何子元素的改变
 
 ```python
-''' 
-深拷贝：包含对象里面的自对象的拷贝，所以原始对象的改变不会造成深拷贝里任何子元素的改变
-
+'''
 虽然b是copy a 列表，但是由于a潜逃了一个新的list，所以b 拷贝a时，也拷贝了新的list。
 所以，当a当中新的list值变了时，b里面的也会变。
 如果不想b随着a变化，那就引用deepcopy，如下'''
-# from copy import deepcopy
+
 import copy
 a=[1,2,3,[4,5]]
 b=copy.deepcopy(a)
@@ -89,32 +87,27 @@ print('b:',b)
     b: [1, 2, 3, [4, 5]]
     
 
+元素计数
 
 ```python
 a=[3,5,7,8,4,5,]
 a.count(3)
 ```
 
-
-
-
     1
 
 
-
+index()找某个数据在list中的索引
 
 ```python
 len(a)
 a.index(3)
 ```
 
-
-
-
     0
 
 
-
+index(elem, position)从某个位置开始找某个数据在list中的索引
 
 ```python
 a.index(3,1)
@@ -137,13 +130,11 @@ a.index(3,1)
 a.index(5,1) #从第一个位置索引5
 ```
 
-
-
-
     1
 
 
 
+insert(elem, position)在某个位置插入元素
 
 ```python
 a.insert(2,'*')
@@ -158,26 +149,21 @@ print(a)
 a.index(5,0)
 ```
 
-
-
-
     1
 
 
-
+remove(elem)删除第一次出现的某个元素
+不在list里会报错 ValueError: list.remove(x): x not in list
 
 ```python
 a.remove(3) #只能删掉一个值
-```
-
-
-```python
 print(a)
 ```
 
     [5, '*', 7, 8, 4, 5]
     
 
+append(elem)追加一个元素
 
 ```python
 a=[1,2,3]
@@ -186,12 +172,11 @@ a
 ```
 
 
-
-
     [1, 2, 3, 4]
 
 
 
+pop()删除最后一个元素
 
 ```python
 a.pop() #删一个元素
@@ -209,82 +194,15 @@ a
 ```python
 # 假象输入一个表达式，（3*（4+5）），用stack来检查
 expression = input('qingshuru')
-myz-stack=list()
-left_quotes=['{','[','(']
-right_quotes=['}',']',')']
-
-for ch in expression:
-    if ch in left_quotes:
-        mt_stack.append(ch)
-    elif ch in right_quotes:
-        if my_stack==[]:
-            print('not match')
-        else:
-            left_ch = my_stack.pop()
-            if (left_quotes.index(left_ch)!=right_quotes.index(ch)):
-                print(''not match)
-                break
-        
-if my_stack!=[]:
-    print ('not match')
-else:
-    print('match')
-         
-```
-
-
-      File "<ipython-input-21-8512b220e967>", line 16
-        print(''not match)
-                        ^
-    SyntaxError: invalid syntax
-    
-
-
-
-```python
-expression = input('qingshuru')
-myz-stack=list()
-left_quotes=['{','[','(']
-right_quotes=['}',']',')']
-
-for ch in expression:
-    if ch in left_quotes:
-        mt_stack.append(ch)
-    elif ch in right_quotes:
-        if my_stack==[]:
-            print('not match')
-        else:
-            left_ch = my_stack.pop()
-            if (left_quotes.index(left_ch)!=right_quotes.index(ch)):
-                print('not match')
-                break
-        
-if my_stack!=[]:
-    print ('not match')
-else:
-    print('match')
-```
-
-
-      File "<ipython-input-23-05876ee1879c>", line 2
-        myz-stack=list()
-                        ^
-    SyntaxError: can't assign to operator
-    
-
-
-
-```python
-expression = input('qingshuru')
 my_stack=list()
 left_quotes=['{','[','(']
 right_quotes=['}',']',')']
 
 for ch in expression:
     if ch in left_quotes:
-        mt_stack.append(ch)
+        my_stack.append(ch)
     elif ch in right_quotes:
-        if my_stack==[]:
+        if my_stack == []:
             print('not match')
         else:
             left_ch = my_stack.pop()
@@ -292,30 +210,14 @@ for ch in expression:
                 print('not match')
                 break
         
-if my_stack!=[]:
+if my_stack != []:
     print ('not match')
 else:
     print('match')
+         
 ```
-
-    qingshuru{3,4,5}
-    
-
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-24-0efbfa6f98bf> in <module>
-          6 for ch in expression:
-          7     if ch in left_quotes:
-    ----> 8         mt_stack.append(ch)
-          9     elif ch in right_quotes:
-         10         if my_stack==[]:
-    
-
-    NameError: name 'mt_stack' is not defined
-
+    qingshuru 3*(4+5)
+    match
 
 
 ```python
@@ -407,7 +309,7 @@ a
     [1, 2, 3, [4, 5, 6]]
 
 
-
+extend(list) 扩展list
 
 ```python
 a=[1,2,3]
@@ -422,6 +324,7 @@ a
 
 
 
+reverse() 翻转列表本身，并重新赋值原列表
 
 ```python
 a= list(range(0,6))
@@ -480,6 +383,7 @@ print(a)
     [1, 4, 5, 3, 3, 4, 4, 5, 5, 1, 6, 1, 1, 1, 6, 2, 1, 5, 4, 6]
     
 
+sort() 对列表本身排序，并重新赋值原列表
 
 ```python
 a.sort()
@@ -489,6 +393,7 @@ print(a)
     [1, 1, 1, 1, 1, 1, 2, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6]
     
 
+sorted(list) 对列表排序，赋给另一个变量
 
 ```python
 b=sorted(a)
@@ -528,6 +433,7 @@ print(a)
     [5, 3, 3, 3, 1, 4, 3, 5, 3, 6, 5, 6, 5, 2, 4, 4, 2, 4, 1, 4]
     
 
+%%timeit能够计算for-loop的单次用时
 
 ```python
 %%timeit  #计算用时
@@ -539,6 +445,9 @@ for i in range(0,100):
     7.57 µs ± 366 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
     
 
+sum(list) 对列表求和
+max(list) 寻找最大值
+min(list) 寻找最小值
 
 ```python
 import random
@@ -637,6 +546,9 @@ while True:
 
 ```
 
+    Please input a score: 80
+    grade:  B
+
 
 ```python
 import random
@@ -648,6 +560,9 @@ for i in range (0,60000):
 print (count)
 print ((max(count)-min(count))*6/sum(count))
 ```
+
+    [99825, 99896, 99545, 100697, 99989, 100048]
+    0.01152
 
 
 ```python
@@ -666,10 +581,11 @@ for i in range (0,60000):
     if(last_three ==[6,6,6]):
         count +=1
 
-print (count, count/60000)
-    
+print (count, count/60000)    
 
 ```
+    265 0.004416666666666667
+
 
 
 ```python
@@ -681,8 +597,9 @@ break
 a=[1,2,3,4]
 print(a)
 ```
-
+    [1, 2, 3, 4]
 
 ```python
 a[0]
 ```
+    [1]
