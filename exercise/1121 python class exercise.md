@@ -35,16 +35,19 @@ s.sing()
 class A:
     def __init__(self):
         self.a = 'a'
+        print('a')
         
 class B(A):
     def __init__(self):
         super().__init__()
         self.b='b'
+        print('b')
         
 class C(B):
     def __init__(self):
         super().__init__()   # 继承基类的初始化
         self.c='c'
+        print('c')
         
     def test(self):
             print(self.a,self.b,self.c)
@@ -52,7 +55,9 @@ class C(B):
 c=C()
 c.test()
 ```
-
+    a
+    b
+    c
     a b c
     
 
@@ -109,7 +114,7 @@ class ArithmeticSequence:
     def __init__(self,start=0,step=1):
         self.start=start
         self.step=step
-        step.changed={}
+        self.changed={}
     
     def check_key(key):
             if not isinstance (key,int):raise TypeError
@@ -119,47 +124,19 @@ class ArithmeticSequence:
         ArithmeticSequence.check_key(key)
         try : 
             return self.changed[key]
-        except keyerror:
-            return self.start + key = self.step
+        except KeyError:
+            return self.start + key == self.step
         
     def __setitem__(self,key,value):
         ArithmeticSequence.check_key(key)
         self.changed[key] = value
-    
-```
 
-
-      File "<ipython-input-13-b8251db2242d>", line 16
-        return self.start + key = self.step
-                                ^
-    SyntaxError: invalid syntax
-    
-
-
-
-```python
-s= ArithmeticSequence (1,2)
-print(s[4])
-print(s[1000])
-s[4]=100
 ```
 
 
     ---------------------------------------------------------------------------
 
-    NameError                                 Traceback (most recent call last)
+    False
+    False
+    100
 
-    <ipython-input-14-0edecd533cab> in <module>
-    ----> 1 s= ArithmeticSequence (1,2)
-          2 print(s[4])
-          3 print(s[1000])
-          4 s[4]=100
-    
-
-    NameError: name 'ArithmeticSequence' is not defined
-
-
-
-```python
-
-```
