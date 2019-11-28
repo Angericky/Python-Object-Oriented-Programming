@@ -1,9 +1,10 @@
 # Python-Object-Oriented-Programming
-Exercises for 2019 Autumn Python Object Oriented Programming Course. StuNo: 51194501025.
+Exercises for 2019 Autumn Python Object Oriented Programming Course. <br/>
+StuNo: 51194501025.
 
 # Directory
-Folder *example* has example python scripts from classes.
-Folder *exercise* has personal hands-on exercises for every subject in class.
+Folder **example** has example python scripts from classes.<br/>
+Folder **exercise** has personal hands-on exercises for every subject in class.
 
 ## Subject list
 - lists
